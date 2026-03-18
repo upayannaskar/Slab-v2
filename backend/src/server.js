@@ -6,6 +6,7 @@ import { clerkMiddleware } from '@clerk/express';
 import { functions, inngest } from './config/inngest.js';
 import { serve } from "inngest/express";
 import chatRoutes from './routes/chat.route.js';
+import cors from "cors";
 
 import * as Sentry from "@sentry/node"
 
@@ -40,5 +41,7 @@ const startServer = async () => {
     process.exit(1);
   }
 }
+
+startServer()
 
 export default app
