@@ -13,7 +13,7 @@ import * as Sentry from "@sentry/node"
 const app = express();
 
 app.use(express.json());
-app.use(cors({origin: "http://localhost:5173", credentials: true}))
+app.use(cors({origin: "https://5173-firebase-slab-v2-1773738015567.cluster-iktsryn7xnhpexlu6255bftka4.cloudworkstations.dev/", credentials: true}))
 app.use(clerkMiddleware())
 
 app.get("/debug-sentry", (req, res) => {
