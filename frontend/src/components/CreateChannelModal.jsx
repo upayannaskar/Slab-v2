@@ -140,43 +140,49 @@ const CreateChannelModal = ({ onClose }) => {
   };
 
   return (
-    <div className="create-channel-modal-overlay">
-      <div className="create-channel-modal">
-        <div className="create-channel-modal__header">
-          <h2>Create a channel</h2>
-          <button onClick={onClose} className="create-channel-modal__close">
-            <XIcon className="w-5 h-5" />
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+      <div className="w-full max-w-lg rounded-3xl border border-white/10 bg-white/90 p-6 shadow-2xl backdrop-blur-xl">
+        
+        <div className="mb-6 flex items-center justify-between">
+          <h2 className="text-xl font-semibold text-gray-900">Create a channel</h2>
+          <button
+            onClick={onClose}
+            className="rounded-xl p-2 transition hover:bg-black/5"
+          >
+            <XIcon className="h-5 w-5 text-gray-500" />
           </button>
         </div>
-
+  
         {/* form */}
-        <form onSubmit={handleSubmit} className="create-channel-modal__form">
+        <form onSubmit={handleSubmit} className="space-y-5">
+          
           {error && (
-            <div className="form-error">
-              <AlertCircleIcon className="w-4 h-4" />
+            <div className="flex items-center gap-2 rounded-xl bg-red-50 px-3 py-2 text-sm text-red-600">
+              <AlertCircleIcon className="h-4 w-4" />
               <span>{error}</span>
             </div>
           )}
-
+  
           {/* Channel name */}
-          <div className="form-group">
-            <div className="input-with-icon">
-              <HashIcon className="w-4 h-4 input-icon" />
+          <div className="space-y-2">
+            <div className="flex items-center rounded-2xl border border-gray-200 bg-white px-3 py-3 focus-within:border-purple-500">
+              <HashIcon className="mr-2 h-4 w-4 text-gray-400" />
               <input
                 id="channelName"
                 type="text"
                 value={channelName}
                 onChange={handleChannelNameChange}
                 placeholder="e.g. marketing"
-                className={`form-input ${error ? "form-input--error" : ""}`}
+                className={`w-full bg-transparent outline-none ${
+                  error ? "text-red-500" : "text-gray-800"
+                }`}
                 autoFocus
                 maxLength={22}
               />
             </div>
-
-            {/* channel id  preview */}
+  
             {channelName && (
-              <div className="form-hint">
+              <div className="text-xs text-gray-500">
                 Channel ID will be: #
                 {channelName
                   .toLowerCase()
@@ -185,118 +191,140 @@ const CreateChannelModal = ({ onClose }) => {
               </div>
             )}
           </div>
-
+  
           {/* CHANNEL TYPE */}
-          <div className="form-group">
-            <label>Channel type</label>
-
-            <div className="radio-group">
-              <label className="radio-option">
+          <div className="space-y-3">
+            <label className="text-sm font-medium text-gray-700">Channel type</label>
+  
+            <div className="grid gap-3">
+              <label className="flex cursor-pointer items-center gap-3 rounded-2xl border border-gray-200 p-4 hover:bg-gray-50">
                 <input
                   type="radio"
                   value="public"
                   checked={channelType === "public"}
                   onChange={(e) => setChannelType(e.target.value)}
                 />
-                <div className="radio-content">
-                  <HashIcon className="size-4" />
+                <div className="flex items-center gap-3">
+                  <HashIcon className="h-4 w-4 text-purple-500" />
                   <div>
-                    <div className="radio-title">Public</div>
-                    <div className="radio-description">Anyone can join this channel</div>
+                    <div className="font-medium">Public</div>
+                    <div className="text-sm text-gray-500">
+                      Anyone can join this channel
+                    </div>
                   </div>
                 </div>
               </label>
-
-              <label className="radio-option">
+  
+              <label className="flex cursor-pointer items-center gap-3 rounded-2xl border border-gray-200 p-4 hover:bg-gray-50">
                 <input
                   type="radio"
                   value="private"
                   checked={channelType === "private"}
                   onChange={(e) => setChannelType(e.target.value)}
                 />
-                <div className="radio-content">
-                  <LockIcon className="size-4" />
+                <div className="flex items-center gap-3">
+                  <LockIcon className="h-4 w-4 text-purple-500" />
                   <div>
-                    <div className="radio-title">Private</div>
-                    <div className="radio-description">Only invited members can join</div>
+                    <div className="font-medium">Private</div>
+                    <div className="text-sm text-gray-500">
+                      Only invited members can join
+                    </div>
                   </div>
                 </div>
               </label>
             </div>
           </div>
-
-          {/* add members component */}
+  
+          {/* add members */}
           {channelType === "private" && (
-            <div className="form-group">
-              <label>Add members</label>
-              <div className="member-selection-header">
+            <div className="space-y-3">
+              <label className="text-sm font-medium text-gray-700">Add members</label>
+  
+              <div className="flex items-center justify-between">
                 <button
                   type="button"
-                  className="btn btn-secondary btn-small"
+                  className="flex items-center gap-2 rounded-xl bg-gray-100 px-3 py-2 text-sm transition hover:bg-gray-200"
                   onClick={() => setSelectedMembers(users.map((u) => u.id))}
                   disabled={loadingUsers || users.length === 0}
                 >
-                  <UsersIcon className="w-4 h-4" />
+                  <UsersIcon className="h-4 w-4" />
                   Select Everyone
                 </button>
-                <span className="selected-count">{selectedMembers.length} selected</span>
+  
+                <span className="text-sm text-gray-500">
+                  {selectedMembers.length} selected
+                </span>
               </div>
-
-              <div className="members-list">
+  
+              <div className="max-h-48 space-y-2 overflow-y-auto rounded-2xl border border-gray-200 p-3">
                 {loadingUsers ? (
-                  <p>Loading users...</p>
+                  <p className="text-sm text-gray-500">Loading users...</p>
                 ) : users.length === 0 ? (
-                  <p>No users found</p>
+                  <p className="text-sm text-gray-500">No users found</p>
                 ) : (
                   users.map((user) => (
-                    <label key={user.id} className="member-item">
+                    <label
+                      key={user.id}
+                      className="flex items-center gap-3 rounded-xl px-2 py-2 hover:bg-gray-50"
+                    >
                       <input
                         type="checkbox"
                         checked={selectedMembers.includes(user.id)}
                         onChange={() => handleMemberToggle(user.id)}
-                        className="member-checkbox"
                       />
+  
                       {user.image ? (
                         <img
                           src={user.image}
                           alt={user.name || user.id}
-                          className="member-avatar"
+                          className="h-8 w-8 rounded-full object-cover"
                         />
                       ) : (
-                        <div className="member-avatar member-avatar-placeholder">
-                          <span>{(user.name || user.id).charAt(0).toUpperCase()}</span>
+                        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-300 text-sm text-white">
+                          {(user.name || user.id).charAt(0).toUpperCase()}
                         </div>
                       )}
-                      <span className="member-name">{user.name || user.id}</span>
+  
+                      <span className="text-sm text-gray-700">
+                        {user.name || user.id}
+                      </span>
                     </label>
                   ))
                 )}
               </div>
             </div>
           )}
-
+  
           {/* Description */}
-          <div className="form-group">
-            <label htmlFor="description">Description (optional)</label>
+          <div className="space-y-2">
+            <label htmlFor="description" className="text-sm font-medium text-gray-700">
+              Description (optional)
+            </label>
+  
             <textarea
               id="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="What's this channel about?"
-              className="form-textarea"
+              className="w-full rounded-2xl border border-gray-200 px-3 py-3 outline-none focus:border-purple-500"
               rows={3}
             />
           </div>
-
+  
           {/* Actions */}
-          <div className="create-channel-modal__actions">
-            <button type="button" onClick={onClose} className="btn btn-secondary">
+          <div className="flex justify-end gap-3 pt-2">
+            <button
+              type="button"
+              onClick={onClose}
+              className="rounded-xl bg-gray-100 px-4 py-2 transition hover:bg-gray-200"
+            >
               Cancel
             </button>
+  
             <button
               type="submit"
               disabled={!channelName.trim() || isCreating}
-              className="btn btn-primary"
+              className="rounded-xl bg-gradient-to-r from-purple-600 to-fuchsia-600 px-5 py-2 font-medium text-white shadow-md transition hover:scale-[1.02]"
             >
               {isCreating ? "Creating..." : "Create Channel"}
             </button>

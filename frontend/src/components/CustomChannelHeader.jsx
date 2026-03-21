@@ -39,54 +39,60 @@ const CustomChannelHeader = () => {
   };
 
   return (
-    <div className="h-14 border-b border-gray-200 flex items-center px-4 justify-between bg-white">
+    <div className="flex h-16 items-center justify-between border-b border-black/5 bg-white/80 px-5 backdrop-blur-xl">
       <div className="flex items-center gap-3">
         <div className="flex items-center gap-2">
           {channel.data?.private ? (
-            <LockIcon className="size-4 text-[#616061]" />
+            <LockIcon className="h-4 w-4 text-gray-500" />
           ) : (
-            <HashIcon className="size-4 text-[#616061]" />
+            <HashIcon className="h-4 w-4 text-gray-500" />
           )}
 
           {isDM && otherUser?.user?.image && (
             <img
               src={otherUser.user.image}
               alt={otherUser.user.name || otherUser.user.id}
-              className="size-7 rounded-full object-cover mr-1"
+              className="h-8 w-8 rounded-full object-cover shadow-sm"
             />
           )}
 
-          <span className="font-medium text-[#1D1C1D]">
+          <span className="text-sm font-semibold tracking-wide text-gray-800">
             {isDM ? otherUser?.user?.name || otherUser?.user?.id : channel.data?.id}
           </span>
         </div>
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2">
         <button
-          className="flex items-center gap-2 hover:bg-[#F8F8F8] py-1 px-2 rounded"
+          className="flex items-center gap-2 rounded-xl px-3 py-2 transition hover:bg-black/5"
           onClick={() => setShowMembers(true)}
         >
-          <UsersIcon className="size-5 text-[#616061]" />
-          <span className="text-sm text-[#616061]">{memberCount}</span>
+          <UsersIcon className="h-4 w-4 text-gray-500" />
+          <span className="text-sm text-gray-600">{memberCount}</span>
         </button>
 
         <button
-          className="hover:bg-[#F8F8F8] p-1 rounded"
+          className="rounded-xl p-2 transition hover:bg-purple-50"
           onClick={handleVideoCall}
           title="Start Video Call"
         >
-          <VideoIcon className="size-5 text-[#1264A3]" />
+          <VideoIcon className="h-5 w-5 text-purple-600" />
         </button>
 
         {channel.data?.private && (
-          <button className="btn btn-primary" onClick={() => setShowInvite(true)}>
+          <button
+            className="rounded-xl bg-gradient-to-r from-purple-600 to-fuchsia-600 px-4 py-2 text-sm font-medium text-white shadow-md transition hover:scale-[1.02]"
+            onClick={() => setShowInvite(true)}
+          >
             Invite
           </button>
         )}
 
-        <button className="hover:bg-[#F8F8F8] p-1 rounded" onClick={handleShowPinned}>
-          <PinIcon className="size-4 text-[#616061]" />
+        <button
+          className="rounded-xl p-2 transition hover:bg-black/5"
+          onClick={handleShowPinned}
+        >
+          <PinIcon className="h-4 w-4 text-gray-500" />
         </button>
       </div>
 

@@ -32,18 +32,13 @@ const UsersList = ({ activeChannel }) => {
     queryKey: ["users-list", client?.user?.id],
     queryFn: fetchUsers,
     enabled: !!client?.user,
-    staleTime: 1000 * 60 * 5, // 5 mins
+    staleTime: 1000 * 60 * 5,
   });
-
-  // staleTime
-  // what it does: tells React Query the data is "fresh" for 5 minutes
-  // behavior: during these 5 minutes, React Query WON'T refetch the data automatically
 
   const startDirectMessage = async (targetUser) => {
     if (!targetUser || !client?.user) return;
 
     try {
-      //  bc stream does not allow channelId to be longer than 64 chars
       const channelId = [client.user.id, targetUser.id].sort().join("-").slice(0, 64);
       const channel = client.channel("messaging", channelId, {
         members: [client.user.id, targetUser.id],
@@ -62,12 +57,17 @@ const UsersList = ({ activeChannel }) => {
     }
   };
 
-  if (isLoading) return <div className="team-channel-list__message">Loading users...</div>;
-  if (isError) return <div className="team-channel-list__message">Failed to load users</div>;
-  if (!users.length) return <div className="team-channel-list__message">No other users found</div>;
+  if (isLoading)
+    return <div className="px-2 text-sm text-white/60">Loading users...</div>;
+
+  if (isError)
+    return <div className="px-2 text-sm text-red-300">Failed to load users</div>;
+
+  if (!users.length)
+    return <div className="px-2 text-sm text-white/50">No other users found</div>;
 
   return (
-    <div className="team-channel-list__users">
+    <div className="space-y-2">
       {users.map((user) => {
         const channelId = [client.user.id, user.id].sort().join("-").slice(0, 64);
         const channel = client.channel("messaging", channelId, {
@@ -80,39 +80,41 @@ const UsersList = ({ activeChannel }) => {
           <button
             key={user.id}
             onClick={() => startDirectMessage(user)}
-            className={`str-chat__channel-preview-messenger  ${
-              isActive && "!bg-black/20 !hover:bg-black/20 border-l-8 border-purple-500 shadow-lg0"
+            className={`flex w-full items-center rounded-2xl px-4 py-3 transition-all duration-200 ${
+              isActive
+                ? "bg-gradient-to-r from-purple-600/30 to-fuchsia-500/20 border border-purple-400/30 shadow-lg backdrop-blur-md text-white"
+                : "bg-white/5 hover:bg-white/10 text-white/80"
             }`}
           >
-            <div className="flex items-center gap-2 w-full">
+            <div className="flex items-center gap-3 w-full">
               <div className="relative">
                 {user.image ? (
                   <img
                     src={user.image}
                     alt={user.name || user.id}
-                    className="w-4 h-4 rounded-full"
+                    className="h-8 w-8 rounded-full object-cover"
                   />
                 ) : (
-                  <div className="w-4 h-4 rounded-full bg-gray-400 flex items-center justify-center">
-                    <span className="text-xs text-white">
-                      {(user.name || user.id).charAt(0).toUpperCase()}
-                    </span>
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/20 text-xs font-semibold text-white">
+                    {(user.name || user.id).charAt(0).toUpperCase()}
                   </div>
                 )}
 
                 <CircleIcon
-                  className={`w-2 h-2 absolute -bottom-0.5 -right-0.5 ${
-                    user.online ? "text-green-500 fill-green-500" : "text-gray-400 fill-gray-400"
+                  className={`absolute -bottom-0.5 -right-0.5 h-3 w-3 ${
+                    user.online
+                      ? "fill-green-500 text-green-500"
+                      : "fill-gray-400 text-gray-400"
                   }`}
                 />
               </div>
 
-              <span className="str-chat__channel-preview-messenger-name truncate">
+              <span className="flex-1 truncate text-sm tracking-wide">
                 {user.name || user.id}
               </span>
 
               {unreadCount > 0 && (
-                <span className="flex items-center justify-center ml-2 size-4 text-xs rounded-full bg-red-500 ">
+                <span className="ml-2 flex h-5 min-w-[20px] items-center justify-center rounded-full bg-red-500 px-1 text-xs font-semibold text-white shadow">
                   {unreadCount}
                 </span>
               )}
