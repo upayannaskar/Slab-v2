@@ -85,7 +85,10 @@ const HomePage = () => {
 
                 {/* CHANNEL LIST */}
                 <ChannelList
-                  filters={{ members: { $in: [chatClient?.user?.id] } }}
+                  filters={{
+                    members: { $in: [chatClient?.user?.id] },
+                    member_count: { $gt: 2 }
+                  }}
                   options={{ state: true, watch: true }}
                   Preview={({ channel }) => (
                     <CustomChannelPreview
