@@ -75,7 +75,7 @@ const CallPage = () => {
   }
 
   return (
-    <div className="h-screen bg-zinc-950 flex items-center justify-center px-4 py-6">
+    <div className="h-screen bg-zinc-950 flex items-center justify-center px-4 py-6 text-white">
       <div className="w-full max-w-6xl h-[92vh] rounded-3xl overflow-hidden shadow-2xl border border-zinc-800 bg-black">
         {client && call ? (
           <StreamVideo client={client}>
@@ -103,7 +103,7 @@ const CallContent = () => {
 
   return (
     <StreamTheme>
-      <div className="relative h-full w-full bg-black">
+      <div className="relative h-full w-full bg-black text-white">
         <SpeakerLayout />
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-zinc-900/80 backdrop-blur-md px-4 py-2 rounded-2xl shadow-lg">
           <CallControls />
