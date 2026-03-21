@@ -100,7 +100,7 @@ const HomePage = () => {
                     />
                   )}
                   List={({ children, loading, error }) => (
-                    <div className="space-y-6">
+                    <div className="space-y-6 bg-transparent">
 
                       <div className="bg-transparent">
                         <div className="mb-3 flex items-center gap-2 rounded-xl bg-white/5 px-3 py-3 text-sm font-semibold uppercase tracking-wider text-white/80">
