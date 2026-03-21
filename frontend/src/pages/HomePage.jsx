@@ -71,7 +71,7 @@ const HomePage = () => {
               </div>
 
               {/* CHANNELS LIST */}
-              <div className="flex-1 overflow-y-auto px-4 py-5">
+              <div className="flex-1 overflow-hidden px-4 py-5">
 
                 <div className="mb-6">
                   <button
