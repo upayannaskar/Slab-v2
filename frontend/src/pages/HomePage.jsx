@@ -65,7 +65,7 @@ const HomePage = () => {
                   </span>
                 </div>
 
-                <div className="rounded-full border border-white/10 bg-white/10 p-1 backdrop-blur-md">
+                <div className="rounded-full bg-white/10 p-1 backdrop-blur-md">
                   <UserButton />
                 </div>
               </div>
@@ -102,8 +102,8 @@ const HomePage = () => {
                   List={({ children, loading, error }) => (
                     <div className="space-y-6">
 
-                      <div>
-                        <div className="mb-3 flex items-center gap-2 rounded-xl px-3 py-3 text-sm font-semibold uppercase tracking-wider text-white/80">
+                      <div className="bg-transparent">
+                        <div className="mb-3 flex items-center gap-2 rounded-xl bg-white/5 px-3 py-3 text-sm font-semibold uppercase tracking-wider text-white/80">
                           <HashIcon className="size-4" />
                           <span>Channels</span>
                         </div>
