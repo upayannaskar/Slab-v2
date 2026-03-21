@@ -65,7 +65,7 @@ const HomePage = () => {
                   </span>
                 </div>
 
-                <div className="rounded-full p-1 backdrop-blur-md">
+                <div className="rounded-full bg-transparent p-1 backdrop-blur-md">
                   <UserButton />
                 </div>
               </div>
