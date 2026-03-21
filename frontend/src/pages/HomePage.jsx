@@ -47,11 +47,11 @@ const HomePage = () => {
     <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-900 to-fuchsia-700 p-4">
       <Chat client={chatClient}>
         <div className="flex h-[95vh] overflow-hidden rounded-3xl border border-white/10 bg-white/10 backdrop-blur-xl shadow-2xl">
-          
+
           {/* LEFT SIDEBAR */}
           <div className="w-[320px] border-r border-white/10 bg-black/20 backdrop-blur-xl">
             <div className="flex h-full flex-col">
-              
+
               {/* HEADER */}
               <div className="flex items-center justify-between gap-4 border-b border-white/10 px-6 py-5">
                 <div className="flex items-center gap-3">
@@ -64,15 +64,15 @@ const HomePage = () => {
                     Slab
                   </span>
                 </div>
-  
+
                 <div className="rounded-full border border-white/10 bg-white/10 p-1 backdrop-blur-md">
                   <UserButton />
                 </div>
               </div>
-  
+
               {/* CHANNELS LIST */}
               <div className="flex-1 overflow-y-auto px-4 py-5">
-                
+
                 <div className="mb-6">
                   <button
                     onClick={() => setIsCreateModalOpen(true)}
@@ -82,7 +82,7 @@ const HomePage = () => {
                     <span>Create Channel</span>
                   </button>
                 </div>
-  
+
                 {/* CHANNEL LIST */}
                 <ChannelList
                   filters={{ members: { $in: [chatClient?.user?.id] } }}
@@ -98,34 +98,34 @@ const HomePage = () => {
                   )}
                   List={({ children, loading, error }) => (
                     <div className="space-y-6">
-                      
+
                       <div>
                         <div className="mb-3 flex items-center gap-2 rounded-xl bg-white/5 px-3 py-3 text-sm font-semibold uppercase tracking-wider text-white/80">
                           <HashIcon className="size-4" />
                           <span>Channels</span>
                         </div>
-  
+
                         {loading && (
                           <div className="px-2 text-sm text-white/60">
                             Loading channels...
                           </div>
                         )}
-  
+
                         {error && (
                           <div className="px-2 text-sm text-red-300">
                             Error loading channels
                           </div>
                         )}
-  
+
                         <div className="space-y-2">{children}</div>
                       </div>
-  
+
                       <div>
                         <div className="mb-3 flex items-center gap-2 rounded-xl bg-white/5 px-3 py-3 text-sm font-semibold uppercase tracking-wider text-white/80">
                           <UsersIcon className="size-4" />
                           <span>Direct Messages</span>
                         </div>
-  
+
                         <UsersList activeChannel={activeChannel} />
                       </div>
                     </div>
@@ -134,21 +134,25 @@ const HomePage = () => {
               </div>
             </div>
           </div>
-  
+
           {/* RIGHT CONTAINER */}
-          <div className="flex flex-1 flex-col bg-white/90 backdrop-blur-xl">
+          <div className="flex flex-1 bg-white/90 backdrop-blur-xl overflow-hidden">
             <Channel channel={activeChannel}>
-              <Window>
-                <CustomChannelHeader />
-                <MessageList />
-                <MessageInput />
-              </Window>
-  
-              <Thread />
+              <div className="flex h-full w-full overflow-hidden">
+                <Window>
+                  <CustomChannelHeader />
+                  <MessageList />
+                  <MessageInput />
+                </Window>
+
+                <div className="hidden">
+                  <Thread />
+                </div>
+              </div>
             </Channel>
           </div>
         </div>
-  
+
         {isCreateModalOpen && (
           <CreateChannelModal onClose={() => setIsCreateModalOpen(false)} />
         )}
