@@ -19,7 +19,11 @@ const UsersList = ({ activeChannel }) => {
       { limit: 20 }
     );
 
-    const usersOnly = response.users.filter((user) => !user.id.startsWith("recording-"));
+    const usersOnly = response.users.filter(
+      (user) =>
+        user.id.startsWith("user_") &&
+        !user.id.startsWith("recording-")
+    );
 
     return usersOnly;
   }, [client]);
