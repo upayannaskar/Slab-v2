@@ -1,5 +1,13 @@
 @import "tailwindcss";
-.str-chat-channel-list, 
-.str-chat__channel-list-messenger {
+/* This targets the specific container rendering that dark grey box */
+.str-chat-channel-list,
+.str-chat__channel-list-messenger,
+.str-chat__channel-list-messenger__main {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* This removes the background from the "No channels" empty state box */
+.str-chat__empty-channel-list {
   background: transparent !important;
 }
