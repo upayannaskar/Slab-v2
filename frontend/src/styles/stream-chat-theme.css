@@ -1206,3 +1206,11 @@
 .str-chat__channel-preview-messenger {
   background: transparent !important;
 }
+.str-chat__channel-list-messenger__main-header {
+  display: none !important;
+}
+
+.str-chat__channel-list-messenger__main {
+  background: transparent !important;
+  padding: 0 !important;
+}
