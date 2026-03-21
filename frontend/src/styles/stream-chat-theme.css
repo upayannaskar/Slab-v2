@@ -1171,17 +1171,29 @@
   background: rgba(255,255,255,0.15);
   border-radius: 999px;
 }
-.str-chat__channel {
-  width: 100% !important;
-}
 
 .str-chat__main-panel {
   width: 100% !important;
+  height: 100% !important;
+}
+
+.str-chat__channel {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.str-chat__message-list {
+  height: 100% !important;
 }
 
 .str-chat__thread {
   display: none !important;
 }
-.str-chat__message-list {
-  height: 100%;
+
+.str-chat__list {
+  width: 100% !important;
+}
+
+.str-chat__container {
+  height: 100% !important;
 }

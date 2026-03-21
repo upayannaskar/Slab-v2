@@ -136,15 +136,19 @@ const HomePage = () => {
           </div>
 
           {/* RIGHT CONTAINER */}
-          <div className="flex flex-1 bg-white/90 backdrop-blur-xl overflow-hidden">
+          <div className="flex flex-1 overflow-hidden bg-white/90 backdrop-blur-xl">
             <Channel channel={activeChannel}>
               <Window>
-                <div className="flex h-full w-full flex-col">
+                <div className="flex h-[95vh] flex-col overflow-hidden">
                   <CustomChannelHeader />
+
                   <div className="flex-1 overflow-y-auto">
                     <MessageList />
                   </div>
-                  <MessageInput />
+
+                  <div className="border-t border-gray-200">
+                    <MessageInput />
+                  </div>
                 </div>
               </Window>
             </Channel>
