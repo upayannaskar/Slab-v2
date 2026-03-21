@@ -1197,3 +1197,12 @@
 .str-chat__container {
   height: 100% !important;
 }
+
+.str-chat__channel-list,
+.str-chat__channel-list-messenger,
+.str-chat__channel-list-messenger__main {
+  background: transparent !important;
+}
+.str-chat__channel-preview-messenger {
+  background: transparent !important;
+}
