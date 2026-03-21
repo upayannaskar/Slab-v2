@@ -100,14 +100,15 @@ const HomePage = () => {
                     />
                   )}
                   List={({ children, loading, error }) => (
-                    <div className="space-y-6 bg-transparent">
-
+                    <div className="flex flex-col space-y-6 bg-transparent">
+                      {/* CHANNELS SECTION */}
                       <div className="bg-transparent">
                         <div className="mb-3 flex items-center gap-2 rounded-xl bg-white/5 px-3 py-3 text-sm font-semibold uppercase tracking-wider text-white/80">
                           <HashIcon className="size-4" />
                           <span>Channels</span>
                         </div>
 
+                        {/* Status Indicators */}
                         {loading && (
                           <div className="px-2 text-sm text-white/60">
                             Loading channels...
@@ -120,16 +121,22 @@ const HomePage = () => {
                           </div>
                         )}
 
-                        <div className="space-y-2">{children}</div>
+                        {/* Channel Items Container */}
+                        <div className="space-y-2 bg-transparent">
+                          {children}
+                        </div>
                       </div>
 
-                      <div>
+                      {/* DIRECT MESSAGES SECTION */}
+                      <div className="bg-transparent">
                         <div className="mb-3 flex items-center gap-2 rounded-xl bg-white/5 px-3 py-3 text-sm font-semibold uppercase tracking-wider text-white/80">
                           <UsersIcon className="size-4" />
                           <span>Direct Messages</span>
                         </div>
 
-                        <UsersList activeChannel={activeChannel} />
+                        <div className="bg-transparent">
+                          <UsersList activeChannel={activeChannel} />
+                        </div>
                       </div>
                     </div>
                   )}
