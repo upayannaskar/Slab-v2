@@ -67,12 +67,16 @@ const CallPage = () => {
   }, [tokenData, user, callId]);
 
   if (isConnecting || !isLoaded) {
-    return <div className="h-screen flex justify-center items-center">Connecting to call...</div>;
+    return (
+      <div className="h-screen flex justify-center items-center bg-zinc-950 text-white text-lg font-medium">
+        Connecting to call...
+      </div>
+    );
   }
 
   return (
-    <div className="h-screen flex flex-col items-center justify-center bg-gray-100">
-      <div className="relative w-full max-w-4xl mx-auto">
+    <div className="h-screen bg-zinc-950 flex items-center justify-center px-4 py-6">
+      <div className="w-full max-w-6xl h-[92vh] rounded-3xl overflow-hidden shadow-2xl border border-zinc-800 bg-black">
         {client && call ? (
           <StreamVideo client={client}>
             <StreamCall call={call}>
@@ -80,8 +84,8 @@ const CallPage = () => {
             </StreamCall>
           </StreamVideo>
         ) : (
-          <div className="flex items-center justify-center h-full">
-            <p>Could not initialize call. Please refresh or try again later</p>
+          <div className="flex items-center justify-center h-full text-zinc-300 text-lg">
+            Could not initialize call. Please refresh or try again later
           </div>
         )}
       </div>
@@ -99,8 +103,12 @@ const CallContent = () => {
 
   return (
     <StreamTheme>
-      <SpeakerLayout />
-      <CallControls />
+      <div className="relative h-full w-full bg-black">
+        <SpeakerLayout />
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-zinc-900/80 backdrop-blur-md px-4 py-2 rounded-2xl shadow-lg">
+          <CallControls />
+        </div>
+      </div>
     </StreamTheme>
   );
 };
