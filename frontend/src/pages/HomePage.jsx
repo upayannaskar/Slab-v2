@@ -138,17 +138,15 @@ const HomePage = () => {
           {/* RIGHT CONTAINER */}
           <div className="flex flex-1 bg-white/90 backdrop-blur-xl overflow-hidden">
             <Channel channel={activeChannel}>
-              <div className="flex h-full w-full overflow-hidden">
-                <Window>
+              <Window>
+                <div className="flex h-full w-full flex-col">
                   <CustomChannelHeader />
-                  <MessageList />
+                  <div className="flex-1 overflow-y-auto">
+                    <MessageList />
+                  </div>
                   <MessageInput />
-                </Window>
-
-                <div className="hidden">
-                  <Thread />
                 </div>
-              </div>
+              </Window>
             </Channel>
           </div>
         </div>
