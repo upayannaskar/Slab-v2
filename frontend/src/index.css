@@ -1,1 +1,5 @@
 @import "tailwindcss";
+.str-chat-channel-list, 
+.str-chat__channel-list-messenger {
+  background: transparent !important;
+}
