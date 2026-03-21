@@ -16,7 +16,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://slab-v2-fr.vercel.app",
+    origin: "https://slab-chat.vercel.app",
     credentials: true,
   })
 );
