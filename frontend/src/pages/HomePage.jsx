@@ -54,7 +54,7 @@ const HomePage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-900 to-fuchsia-700 p-2 md:p-4">
       <Chat client={chatClient}>
-        <div className="flex h-[95vh] overflow-hidden rounded-3xl border border-white/10 bg-white/10 backdrop-blur-xl shadow-2xl relative">
+        <div className="flex h-[95vh] overflow-hidden rounded-3xl border border-white/10 backdrop-blur-xl shadow-2xl relative">
 
           {/* 🔥 MOBILE OVERLAY */}
           {isSidebarOpen && (
