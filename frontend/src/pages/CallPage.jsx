@@ -105,20 +105,24 @@ const CallContent = () => {
 
   return (
     <StreamTheme>
-      {/* 1. Use flex-col to stack video and controls.
-         2. h-full ensures it fills the 92vh parent.
-      */}
-      <div className="flex flex-col h-full w-full bg-black text-white">
+      <div className="flex h-full w-full bg-black text-white">
         
-        {/* Video Area: flex-1 expands to fill all available space */}
-        <div className="flex-1 min-h-0 relative overflow-hidden">
+        {/* Main Video Area - Takes up remaining space */}
+        <div className="flex-1 min-w-0 overflow-hidden">
           <SpeakerLayout />
         </div>
 
-        {/* Controls Area: 
-           This will now always stay at the bottom of the visible area.
+        {/* Vertical Sidebar Area:
+          The 'inline-style' approach below forces the SDK's 
+          internal horizontal row into a vertical column.
         */}
-        <div className="flex justify-center items-center p-3 bg-zinc-900/90 border-t border-zinc-800 md:pb-6">
+        <div 
+          className="flex flex-col items-center justify-center w-20 bg-zinc-900/90 border-l border-zinc-800 p-2
+                     [&_.str-video__call-controls]:flex-col 
+                     [&_.str-video__call-controls]:gap-4 
+                     [&_.str-video__call-controls]:bg-transparent
+                     [&_.str-video__call-controls-button]:m-0"
+        >
           <CallControls onLeave={() => navigate("/")} />
         </div>
         
