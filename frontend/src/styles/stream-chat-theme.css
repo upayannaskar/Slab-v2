@@ -1292,3 +1292,14 @@
 .str-chat__channel-list-messenger__main > div {
   background: transparent !important;
 }
+/* 🚨 NUKE ALL BACKGROUNDS inside sidebar list */
+
+.str-chat__channel-list,
+.str-chat__channel-list-messenger,
+.str-chat__channel-list-messenger__main,
+.str-chat__channel-list-messenger__main > div,
+.str-chat__channel-list-messenger__main > div > div {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
