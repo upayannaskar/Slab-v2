@@ -134,7 +134,7 @@ const HomePage = () => {
                       />
                     )}
                     List={({ children, loading, error }) => (
-                      <div className="flex flex-col space-y-6 bg-red-200">
+                      <div className="flex flex-col space-y-6 bg-gradient-to-br from-indigo-950 via-purple-900 to-fuchsia-700">
 
                         <div>
                           <div className="mb-3 flex items-center gap-2 rounded-xl bg-white/5 px-3 py-3 text-sm font-semibold text-white/80">
