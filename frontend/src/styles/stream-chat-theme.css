@@ -1214,3 +1214,14 @@
   background: transparent !important;
   padding: 0 !important;
 }
+/* 🚀 Increase message bubble width */
+.str-chat__message-simple__content {
+  max-width: 85% !important; /* default is ~70% */
+}
+
+/* Optional: even wider on mobile */
+@media (max-width: 640px) {
+  .str-chat__message-simple__content {
+    max-width: 92% !important;
+  }
+}
