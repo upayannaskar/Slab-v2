@@ -95,19 +95,31 @@ const CallPage = () => {
 
 const CallContent = () => {
   const { useCallCallingState } = useCallStateHooks();
-
   const callingState = useCallCallingState();
   const navigate = useNavigate();
 
-  if (callingState === CallingState.LEFT) return navigate("/");
+  if (callingState === CallingState.LEFT) {
+    navigate("/");
+    return null;
+  }
 
   return (
     <StreamTheme>
-      <div className="relative h-full w-full bg-black text-white">
-        <SpeakerLayout />
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-zinc-900/80 backdrop-blur-md px-4 py-2 rounded-2xl shadow-lg">
-          <CallControls />
+      {/* Changing to flex-col allows the SpeakerLayout to grow 
+        and the controls to sit naturally at the bottom.
+      */}
+      <div className="flex flex-col h-full w-full bg-black text-white">
+        
+        {/* Video Area: flex-1 makes it fill all remaining space */}
+        <div className="flex-1 overflow-hidden">
+          <SpeakerLayout />
         </div>
+
+        {/* Controls Area: Fixed height at the bottom */}
+        <div className="flex items-center justify-center p-4 bg-zinc-900/90 border-t border-zinc-800">
+          <CallControls onLeave={() => navigate("/")} />
+        </div>
+        
       </div>
     </StreamTheme>
   );
