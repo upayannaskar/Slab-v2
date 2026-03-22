@@ -1244,3 +1244,29 @@
 .str-chat__channel-list-messenger__main {
   overflow: visible !important;
 }
+/* 🔥 Make channel items match sidebar glass look */
+.str-chat__channel-preview-messenger {
+  background: rgba(255, 255, 255, 0.06) !important;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Active item */
+.str-chat__channel-preview-messenger--active {
+  background: linear-gradient(
+    135deg,
+    rgba(114, 9, 183, 0.35),
+    rgba(83, 52, 131, 0.35)
+  ) !important;
+}
+/* 🚫 Kill ugly gray backgrounds from Stream */
+.str-chat,
+.str-chat__channel-list,
+.str-chat__channel-list-messenger,
+.str-chat__channel-list-messenger__main {
+  background: transparent !important;
+}
+/* subtle glow for depth */
+.str-chat__channel-preview-messenger:hover {
+  box-shadow: 0 6px 20px rgba(114, 9, 183, 0.25);
+}
