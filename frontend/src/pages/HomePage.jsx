@@ -67,18 +67,20 @@ const HomePage = () => {
           {/* 🔥 SIDEBAR */}
           <div
             className={`
-              fixed md:static z-50 md:z-auto
-              h-full w-[280px] md:w-[320px]
-              bg-black/20 backdrop-blur-xl border-r border-white/10
-              transform transition-transform duration-300
-              ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
-              md:translate-x-0
-            `}
+    fixed md:static z-50 md:z-auto
+    top-0 left-0
+    h-screen md:h-full
+    w-[280px] md:w-[320px]
+    bg-black/20 backdrop-blur-xl border-r border-white/10
+    transform transition-transform duration-300
+    ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
+    md:translate-x-0
+  `}
           >
             <div className="flex h-full flex-col">
 
-              {/* HEADER */}
-              <div className="flex items-center justify-between gap-4 border-b border-white/10 px-6 py-5">
+              {/* HEADER (fixed height) */}
+              <div className="flex items-center justify-between gap-4 border-b border-white/10 px-6 py-5 flex-shrink-0">
                 <div className="flex items-center gap-3">
                   <img
                     src="/logo.png"
@@ -89,30 +91,31 @@ const HomePage = () => {
                 </div>
 
                 <div className="flex items-center gap-2">
-                  {/* CLOSE BUTTON (mobile only) */}
                   <button
                     className="md:hidden text-white"
                     onClick={() => setIsSidebarOpen(false)}
                   >
                     <XIcon />
                   </button>
-
                   <UserButton />
                 </div>
               </div>
 
-              {/* CHANNELS */}
-              <div className="flex-1 overflow-hidden px-4 py-5">
+              {/* 🔥 SCROLLABLE CONTENT */}
+              <div className="flex-1 overflow-y-auto px-4 py-5">
+
+                {/* CREATE BUTTON */}
                 <div className="mb-6">
                   <button
                     onClick={() => setIsCreateModalOpen(true)}
-                    className="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-purple-600 to-fuchsia-600 px-4 py-4 font-semibold text-white shadow-lg hover:scale-[1.02]"
+                    className="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-purple-600 to-fuchsia-600 px-4 py-4 font-semibold text-white shadow-lg"
                   >
                     <PlusIcon className="size-4" />
                     Create Channel
                   </button>
                 </div>
 
+                {/* CHANNEL LIST */}
                 <ChannelList
                   filters={{
                     members: { $in: [chatClient?.user?.id] },
@@ -125,7 +128,7 @@ const HomePage = () => {
                       activeChannel={activeChannel}
                       setActiveChannel={(channel) => {
                         setSearchParams({ channel: channel.id });
-                        setIsSidebarOpen(false); // 👈 close on select (mobile UX)
+                        setIsSidebarOpen(false); // close on mobile click
                       }}
                     />
                   )}
@@ -145,7 +148,7 @@ const HomePage = () => {
                         <div className="space-y-2">{children}</div>
                       </div>
 
-                      {/* DM */}
+                      {/* DIRECT MESSAGES */}
                       <div>
                         <div className="mb-3 flex items-center gap-2 rounded-xl bg-white/5 px-3 py-3 text-sm font-semibold text-white/80">
                           <UsersIcon className="size-4" />
