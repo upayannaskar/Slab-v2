@@ -1270,3 +1270,25 @@
 .str-chat__channel-preview-messenger:hover {
   box-shadow: 0 6px 20px rgba(114, 9, 183, 0.25);
 }
+/* 🔥 REMOVE the ugly container box around Channels + DM */
+.str-chat__channel-list-messenger__main {
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Also remove wrapper background */
+.str-chat__channel-list-messenger {
+  background: transparent !important;
+}
+
+/* Ensure no hidden gray layer remains */
+.str-chat__channel-list {
+  background: transparent !important;
+}
+/* make your section headers float nicely */
+.str-chat__channel-list-messenger__main > div {
+  background: transparent !important;
+}
