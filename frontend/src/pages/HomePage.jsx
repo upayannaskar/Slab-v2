@@ -102,61 +102,66 @@ const HomePage = () => {
               </div>
 
               {/* CHANNELS */}
-              <div className="flex-1 overflow-hidden px-4 py-5">
-                <div className="mb-6">
-                  <button
-                    onClick={() => setIsCreateModalOpen(true)}
-                    className="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-purple-600 to-fuchsia-600 px-4 py-4 font-semibold text-white shadow-lg hover:scale-[1.02]"
-                  >
-                    <PlusIcon className="size-4" />
-                    Create Channel
-                  </button>
+              <div className="flex-1 min-h-0 overflow-hidden px-4 py-5">
+                <div className="h-full overflow-y-auto pr-1">
+
+                  {/* CREATE BUTTON */}
+                  <div className="mb-6">
+                    <button
+                      onClick={() => setIsCreateModalOpen(true)}
+                      className="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-purple-600 to-fuchsia-600 px-4 py-4 font-semibold text-white shadow-lg"
+                    >
+                      <PlusIcon className="size-4" />
+                      Create Channel
+                    </button>
+                  </div>
+
+                  {/* CHANNEL LIST */}
+                  <ChannelList
+                    filters={{
+                      members: { $in: [chatClient?.user?.id] },
+                      member_count: { $gt: 2 },
+                    }}
+                    options={{ state: true, watch: true }}
+                    Preview={({ channel }) => (
+                      <CustomChannelPreview
+                        channel={channel}
+                        activeChannel={activeChannel}
+                        setActiveChannel={(channel) => {
+                          setSearchParams({ channel: channel.id });
+                          setIsSidebarOpen(false);
+                        }}
+                      />
+                    )}
+                    List={({ children, loading, error }) => (
+                      <div className="flex flex-col space-y-6">
+
+                        <div>
+                          <div className="mb-3 flex items-center gap-2 rounded-xl bg-white/5 px-3 py-3 text-sm font-semibold text-white/80">
+                            <HashIcon className="size-4" />
+                            Channels
+                          </div>
+
+                          {loading && <p className="text-white/60">Loading...</p>}
+                          {error && <p className="text-red-300">Error</p>}
+
+                          <div className="space-y-2">{children}</div>
+                        </div>
+
+                        <div>
+                          <div className="mb-3 flex items-center gap-2 rounded-xl bg-white/5 px-3 py-3 text-sm font-semibold text-white/80">
+                            <UsersIcon className="size-4" />
+                            Direct Messages
+                          </div>
+
+                          <UsersList activeChannel={activeChannel} />
+                        </div>
+
+                      </div>
+                    )}
+                  />
+
                 </div>
-
-                <ChannelList
-                  filters={{
-                    members: { $in: [chatClient?.user?.id] },
-                    member_count: { $gt: 2 },
-                  }}
-                  options={{ state: true, watch: true }}
-                  Preview={({ channel }) => (
-                    <CustomChannelPreview
-                      channel={channel}
-                      activeChannel={activeChannel}
-                      setActiveChannel={(channel) => {
-                        setSearchParams({ channel: channel.id });
-                        setIsSidebarOpen(false); // 👈 close on select (mobile UX)
-                      }}
-                    />
-                  )}
-                  List={({ children, loading, error }) => (
-                    <div className="flex flex-col space-y-6">
-
-                      {/* CHANNELS */}
-                      <div>
-                        <div className="mb-3 flex items-center gap-2 rounded-xl bg-white/5 px-3 py-3 text-sm font-semibold text-white/80">
-                          <HashIcon className="size-4" />
-                          Channels
-                        </div>
-
-                        {loading && <p className="text-white/60">Loading...</p>}
-                        {error && <p className="text-red-300">Error</p>}
-
-                        <div className="space-y-2">{children}</div>
-                      </div>
-
-                      {/* DM */}
-                      <div>
-                        <div className="mb-3 flex items-center gap-2 rounded-xl bg-white/5 px-3 py-3 text-sm font-semibold text-white/80">
-                          <UsersIcon className="size-4" />
-                          Direct Messages
-                        </div>
-
-                        <UsersList activeChannel={activeChannel} />
-                      </div>
-                    </div>
-                  )}
-                />
               </div>
             </div>
           </div>

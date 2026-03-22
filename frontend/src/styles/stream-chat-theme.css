@@ -1226,3 +1226,21 @@
     max-width: 92% !important;
   }
 }
+/* 🚨 FORCE Stream to respect height */
+.str-chat__channel-list,
+.str-chat__channel-list-messenger,
+.str-chat__channel-list-messenger__main {
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+/* 🔥 Allow parent to control scrolling */
+.str-chat__channel-list {
+  display: block !important;
+}
+
+/* Prevent internal scroll conflicts */
+.str-chat__channel-list-messenger__main {
+  overflow: visible !important;
+}
