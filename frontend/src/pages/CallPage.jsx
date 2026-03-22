@@ -105,18 +105,20 @@ const CallContent = () => {
 
   return (
     <StreamTheme>
-      {/* Changing to flex-col allows the SpeakerLayout to grow 
-        and the controls to sit naturally at the bottom.
+      {/* 1. Use flex-col to stack video and controls.
+         2. h-full ensures it fills the 92vh parent.
       */}
       <div className="flex flex-col h-full w-full bg-black text-white">
         
-        {/* Video Area: flex-1 makes it fill all remaining space */}
-        <div className="flex-1 overflow-hidden">
+        {/* Video Area: flex-1 expands to fill all available space */}
+        <div className="flex-1 min-h-0 overflow-hidden">
           <SpeakerLayout />
         </div>
 
-        {/* Controls Area: Fixed height at the bottom */}
-        <div className="flex items-center justify-center p-4 bg-zinc-900/90 border-t border-zinc-800">
+        {/* Controls Area: 
+           This will now always stay at the bottom of the visible area.
+        */}
+        <div className="flex justify-center items-center p-3 bg-zinc-900/90 border-t border-zinc-800 md:pb-6">
           <CallControls onLeave={() => navigate("/")} />
         </div>
         
