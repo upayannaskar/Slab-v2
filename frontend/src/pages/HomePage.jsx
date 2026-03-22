@@ -154,7 +154,10 @@ const HomePage = () => {
                             Direct Messages
                           </div>
 
-                          <UsersList activeChannel={activeChannel} />
+                          <UsersList
+                            activeChannel={activeChannel}
+                            onSelectUser={() => setIsSidebarOpen(false)}
+                          />
                         </div>
 
                       </div>
